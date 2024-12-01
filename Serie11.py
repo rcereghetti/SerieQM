@@ -2,9 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.special as sp
 from scipy.special import hermite
-import scienceplots
 
-plt.style.use('science')
 def psi_n(x, n, hbar, m, omega):
     alpha =  m * omega / hbar
     xi = x * np.sqrt(alpha)
@@ -29,13 +27,14 @@ def plot_quantum_probabilities(lam, x, T, N, hbar, m, omega, labels, linestyles,
     for i in range(len(T)):
         plt.plot(x, probability_density(lam, x, T[i], N, hbar, m, omega), label=labels[i], linestyle=linestyles[i], color=colors[i])
     plt.grid()
-    plt.legend(edgecolor='black', facecolor='white')
-    plt.title('Time evolution of the coherent state')
+    plt.legend()
+    plt.title(r'Time evolution of the coherent state with $\lambda = {}$'.format(lam))
     plt.xlabel('x')
     plt.ylabel(r'$|\langle x|\lambda, t \rangle|^2$')
-    plt.savefig('quantum_probabilities.png', dpi=600)
+    plt.savefig(f'time_evolution_lambda={lam}', dpi=600)
     plt.show()
 
+lam = 1
 m = 1
 omega = 1
 hbar = 1
@@ -46,4 +45,4 @@ labels = [r'$t=0$', r'$t=\frac{\pi}{2}$', r'$t=\pi$', r'$t=\frac{3\pi}{2}$']
 linestyles = ['-', '-', '-', ':']
 colors = ['b', 'orange', 'g', 'black']
 
-plot_quantum_probabilities(1, x, T, N, hbar, m, omega, labels, linestyles, colors)
+plot_quantum_probabilities(lam, x, T, N, hbar, m, omega, labels, linestyles, colors)
